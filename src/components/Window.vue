@@ -1,7 +1,15 @@
 <template>
-  <article v-for="(window, index) in windowStore.windows" :key="index" class="window"
-           :class="{ hidden: window.isHidden }">
-    <section class="title-bar">
+  <article
+      v-for="(window, index) in windowStore.windows"
+      :key="index"
+      class="window"
+      :class="{
+  hidden: window.isHidden,
+  centered: window.x === undefined && window.y === undefined
+}" :style="{ left: `${window.x}px`, top: `${window.y}px` }"
+
+  >
+    <section class="title-bar" ref="windowRefs">
       <section>
         <img :src="window.icon" :alt="window.icon">
         <p>{{ window.name }}</p>
@@ -12,40 +20,49 @@
     </section>
     <section class="window-content">
       <button @click="increment">
-          <span>
-            Earn
-          </span>
+        <span>Earn</span>
         <img src="@/assets/images/windows-95.svg" alt="Earn logo">
       </button>
-      <p>
-        +0/s
-      </p>
+      <p>+0/s</p>
       <section class="earn">
-        <p>
-          {{ counterStore.count }}
-        </p>
+        <p>{{ counterStore.count }}</p>
         <img src="@/assets/images/windows-95.svg" alt="Earn logo">
       </section>
     </section>
   </article>
 </template>
 
-<script setup>
-import {useCounterStore} from "@/stores/counterStore.js";
-import {useWindowStore} from "@/stores/windowStore.js";
+<script setup lang="ts">
+import {ref, onMounted} from 'vue';
+import {useDraggable} from '@vueuse/core';
+import {useCounterStore} from '@/stores/counterStore.js';
+import {useWindowStore} from '@/stores/windowStore.js';
 
 const counterStore = useCounterStore();
 const windowStore = useWindowStore();
 
 const increment = () => {
   counterStore.increment();
-  console.log("counterStore.increment", counterStore.count);
+  console.log('counterStore.increment', counterStore.count);
 }
 
 const close = (window) => {
   console.log("close");
   window.isHidden = true;
 }
+
+'<! – Zdroj: https://stackoverflow.com/questions/78889656/vueuse-usedraggable-with-svg-and-v-for – ->'
+const windowRefs = ref([]);
+
+onMounted(() => {
+  windowRefs.value.forEach((el, index) => {
+    useDraggable(el, {
+      onMove: ({x, y}) => {
+        windowStore.updateWindowPosition(index, x, y);
+      }
+    });
+  });
+});
 </script>
 
 <style scoped lang="scss">
@@ -60,10 +77,7 @@ section {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed;
   background-color: rgb(195, 195, 195);
   border-width: 3px;
   border-style: solid;
@@ -84,6 +98,12 @@ section {
 
 .hidden {
   display: none;
+}
+
+.centered {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .title-bar {

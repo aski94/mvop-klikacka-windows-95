@@ -1,7 +1,7 @@
 <template>
   <main>
     <article class="desktop">
-      <section v-for="(app, index) in windowStore.windows" :key="index">
+      <section v-for="(app, index) in windowStore.windows" :key="index" @click="open(app)">
         <img :src="app.icon" :alt="app.name">
         <p>{{ app.name }}</p>
       </section>
@@ -11,10 +11,14 @@
 </template>
 
 <script setup>
-import Window from './Window.vue'
+import Window from './Window.vue';
 import {useWindowStore} from "@/stores/windowStore.js";
 
 const windowStore = useWindowStore();
+
+const open = (app) => {
+  app.isHidden = false;
+}
 </script>
 
 <style scoped lang="scss">
