@@ -154,6 +154,8 @@ section {
 }
 
 .earn {
+  width: 80px;
+  justify-content: flex-end;
   column-gap: 0.5rem;
 
   img {
