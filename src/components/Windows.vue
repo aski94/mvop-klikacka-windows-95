@@ -1,6 +1,6 @@
 <template>
   <article
-      v-for="(window, index) in windowStore.windows"
+      v-for="(window, index) in windowsStore.windows"
       :key="index"
       class="window"
       :class="{
@@ -18,33 +18,16 @@
         <span>X</span>
       </button>
     </section>
-    <section class="window-content">
-      <button @click="increment">
-        <span>Earn</span>
-        <img src="@/assets/images/windows-95.svg" alt="Earn logo">
-      </button>
-      <p>+0/s</p>
-      <section class="earn">
-        <p>{{ counterStore.count }}</p>
-        <img src="@/assets/images/windows-95.svg" alt="Earn logo">
-      </section>
-    </section>
+    <component :is="window.component"></component>
   </article>
 </template>
 
-<script setup lang="ts">
-import {ref, onMounted} from 'vue';
-import {useDraggable} from '@vueuse/core';
-import {useCounterStore} from '@/stores/counterStore.js';
-import {useWindowStore} from '@/stores/windowStore.js';
+<script setup>
+import {ref, onMounted} from "vue";
+import {useDraggable} from "@vueuse/core";
+import {useWindowsStore} from "@/stores/windowsStore.js";
 
-const counterStore = useCounterStore();
-const windowStore = useWindowStore();
-
-const increment = () => {
-  counterStore.increment();
-  console.log('counterStore.increment', counterStore.count);
-}
+const windowsStore = useWindowsStore();
 
 const close = (window) => {
   console.log("close");
@@ -58,7 +41,7 @@ onMounted(() => {
   windowRefs.value.forEach((el, index) => {
     useDraggable(el, {
       onMove: ({x, y}) => {
-        windowStore.updateWindowPosition(index, x, y);
+        windowsStore.updateWindowPosition(index, x, y);
       }
     });
   });
@@ -108,10 +91,11 @@ section {
 
 .title-bar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  column-gap: 40rem;
+  column-gap: 20rem;
   height: 100%;
+  width: 100%;
   white-space: nowrap;
 
   section {
@@ -128,10 +112,8 @@ section {
   }
 }
 
-.window-content {
+:deep(.window-content) {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   background-color: rgb(195, 195, 195);
   box-sizing: border-box;
@@ -141,28 +123,9 @@ section {
     span {
       font-size: 1.5rem;
     }
-
-    img {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
-  }
-
-  p {
-    font-size: 1.5rem;
   }
 }
 
-.earn {
-  width: 80px;
-  justify-content: flex-end;
-  column-gap: 0.5rem;
-
-  img {
-    width: 2.8rem;
-    height: 2.8rem;
-  }
-}
 
 @media (max-width: 1100px) {
   .title-bar {
@@ -170,7 +133,7 @@ section {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .title-bar {
     column-gap: 8rem;
   }

@@ -1,10 +1,18 @@
-import {ref} from 'vue'
-import {defineStore} from 'pinia'
+// Use of markRaw to prevent Vue from reactively tracking the component, which avoids unnecessary performance overhead and prevents warnings. https://vuejs.org/api/reactivity-advanced.html#markraw
+import {ref, markRaw} from "vue"
+import {defineStore} from "pinia"
 
-export const useWindowStore = defineStore("windowStore", () => {
+import MyComputer from "@/components/windows/MyComputer.vue";
+import NetworkNeighborhood from "@/components/windows/NetworkNeighborhood.vue";
+import Inbox from "@/components/windows/Inbox.vue";
+import RecycleBin from "@/components/windows/RecycleBin.vue";
+import TheInternet from "@/components/windows/TheInternet.vue";
+
+export const useWindowsStore = defineStore("windowsStore", () => {
     const windows = ref([
         {
             name: "My computer",
+            component: markRaw(MyComputer),
             icon: "src/assets/images/my-computer.ico",
             isHidden: false,
             x: undefined,
@@ -12,6 +20,7 @@ export const useWindowStore = defineStore("windowStore", () => {
         },
         {
             name: "Network Neighborhood",
+            component: markRaw(NetworkNeighborhood),
             icon: "src/assets/images/network-neighborhood.ico",
             isHidden: true,
             x: undefined,
@@ -19,6 +28,7 @@ export const useWindowStore = defineStore("windowStore", () => {
         },
         {
             name: "Inbox",
+            component: markRaw(Inbox),
             icon: "src/assets/images/inbox.ico",
             isHidden: true,
             x: undefined,
@@ -26,6 +36,7 @@ export const useWindowStore = defineStore("windowStore", () => {
         },
         {
             name: "Recycle Bin",
+            component: markRaw(RecycleBin),
             icon: "src/assets/images/recycle-bin.ico",
             isHidden: true,
             x: undefined,
@@ -33,6 +44,7 @@ export const useWindowStore = defineStore("windowStore", () => {
         },
         {
             name: "The Internet",
+            component: markRaw(TheInternet),
             icon: "src/assets/images/the-internet.ico",
             isHidden: true,
             x: undefined,

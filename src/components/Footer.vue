@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import Apps from './Apps.vue';
+import Apps from "@/components/Apps.vue";
 </script>
 
 <style scoped lang="scss">
@@ -32,6 +32,7 @@ footer {
 }
 
 :deep(.apps) {
+  display: none;
   justify-content: flex-end;
   flex-direction: row;
   padding: 0.25rem;
@@ -49,6 +50,12 @@ footer {
     p{
       display: none;
     }
+  }
+}
+
+@media (max-width: 700px) {
+  .apps{
+    display: flex;
   }
 }
 </style>

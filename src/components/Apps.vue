@@ -1,6 +1,6 @@
 <template>
   <article class="apps">
-    <section v-for="(app, index) in windowStore.windows" :key="index" @click="open(app)">
+    <section v-for="(app, index) in windowsStore.windows" :key="index" @click="open(app)">
       <img :src="app.icon" :alt="app.name">
       <p>{{ app.name }}</p>
     </section>
@@ -8,9 +8,9 @@
 </template>
 
 <script setup>
-import {useWindowStore} from "@/stores/windowStore.js";
+import {useWindowsStore} from "@/stores/windowsStore.js";
 
-const windowStore = useWindowStore();
+const windowsStore = useWindowsStore();
 
 const open = (app) => {
   app.isHidden = false;

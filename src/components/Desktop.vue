@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import Apps from './Apps.vue';
-import Windows from './Windows.vue';
+import Apps from "@/components/Apps.vue";
+import Windows from "@/components/Windows.vue";
 </script>
 
 <style scoped lang="scss">
@@ -19,7 +19,7 @@ main {
   height: 100%;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .apps{
     display: none;
   }
