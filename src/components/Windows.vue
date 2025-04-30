@@ -11,7 +11,7 @@
   >
     <section class="title-bar" ref="windowRefs">
       <section>
-        <img :src="window.icon" :alt="window.icon">
+        <img :src="window.icon" :alt="window.name">
         <p>{{ window.name }}</p>
       </section>
       <button @click="close(window)">

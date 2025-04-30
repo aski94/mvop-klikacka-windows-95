@@ -3,7 +3,7 @@
     <section v-for="(upgrade, index) in upgradesStore.upgrades" :key="index" class="upgrade">
       <section class="description">
         <p>{{ upgrade.title }}</p>
-        <img :src="upgrade.icon" :alt="upgrade.name">
+        <img :src="upgrade.icon" :alt="upgrade.title">
       </section>
       <section class="buy">
         <section class="price">
