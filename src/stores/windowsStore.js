@@ -1,12 +1,13 @@
-// Use of markRaw to prevent Vue from reactively tracking the component, which avoids unnecessary performance overhead and prevents warnings. https://vuejs.org/api/reactivity-advanced.html#markraw
-import {ref, markRaw} from "vue"
-import {defineStore} from "pinia"
+import { ref, markRaw, watch, onMounted } from "vue";
+import { defineStore } from "pinia";
 
 import MyComputer from "@/components/windows/MyComputer.vue";
 import NetworkNeighborhood from "@/components/windows/NetworkNeighborhood.vue";
 import Inbox from "@/components/windows/Inbox.vue";
 import RecycleBin from "@/components/windows/RecycleBin.vue";
 import TheInternet from "@/components/windows/TheInternet.vue";
+
+const KEY = "windowPositions";
 
 export const useWindowsStore = defineStore("windowsStore", () => {
     const windows = ref([
@@ -57,11 +58,41 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         }
     ]);
 
-    const updateWindowPosition = (index, x, y) => {
+    const updateWindowPosition = (index, x, y, isHidden) => {
         windows.value[index].x = x;
         windows.value[index].y = y;
     };
 
+    const resetWindows = () => {
+        windows.value.forEach((window) => {
+            window.x = undefined;
+            window.y = undefined;
+            window.isHidden = window.name !== "My computer";
+        });
+    };
 
-    return {windows, updateWindowPosition}
-})
+    onMounted(() => {
+        const storedWindows = JSON.parse(localStorage.getItem(KEY) ?? "[]");
+        for (let i = 0; i < windows.value.length; i++) {
+            const stored = storedWindows.find(w => w.name === windows.value[i].name);
+
+            if (stored) {
+                windows.value[i].x = stored.x ?? windows.value[i].x;
+                windows.value[i].y = stored.y ?? windows.value[i].y;
+                windows.value[i].isHidden = stored.isHidden !== undefined ? stored.isHidden : windows.value[i].isHidden;
+            }
+        }
+    });
+
+    watch(() => windows.value, () => {
+        const positions = windows.value.map(window => ({
+            name: window.name,
+            x: window.x,
+            y: window.y,
+            isHidden: window.isHidden
+        }));
+        localStorage.setItem(KEY, JSON.stringify(positions));
+    }, { deep: true });
+
+    return { windows, updateWindowPosition, resetWindows};
+});

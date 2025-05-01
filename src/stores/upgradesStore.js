@@ -1,6 +1,8 @@
-import {ref} from "vue"
+import {ref, watch, onMounted} from "vue"
 import {defineStore} from "pinia"
 import {useCounterStore} from "@/stores/counterStore.js"
+
+const KEY = "upgrades";
 
 export const useUpgradesStore = defineStore("upgradesStore", () => {
     const counterStore = useCounterStore();
@@ -58,6 +60,25 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
           console.log(upgrade.perClick);
           */
     };
+
+    onMounted(() => {
+        const storedUpgrades = JSON.parse(localStorage.getItem(KEY) ?? "[]");
+
+        for(let upgrade of upgrades.value) {
+            const stored = storedUpgrades.find(u => u.title == upgrade.title);
+
+            if(stored) {
+                upgrade.amount = stored.amount;
+                upgrade.price = stored.price;
+            }
+        }
+    });
+
+    watch(() => upgrades.value, () => {
+        localStorage.setItem(KEY, JSON.stringify(upgrades.value));
+    }, {
+        deep: true
+    });
 
     return {upgrades, upgrade, logs}
 })

@@ -1,7 +1,7 @@
 <template>
   <footer>
     <router-link to="/" class="start-button">
-      <button>
+      <button @click="reset">
         <img src="@/assets/images/windows-95-header.png" alt="Windows 95 logo" />
         <span>Start</span>
       </button>
@@ -11,7 +11,14 @@
 </template>
 
 <script setup>
+import {useWindowsStore} from "@/stores/windowsStore.js";
 import Apps from "@/components/Apps.vue";
+
+const windowsStore = useWindowsStore();
+
+const reset = () => {
+  windowsStore.resetWindows();
+}
 </script>
 
 <style scoped lang="scss">
@@ -24,6 +31,7 @@ footer {
   box-sizing: border-box;
   background-color: rgb(195, 195, 195);
   border-top: 3px solid white;
+  z-index: 15;
 
  a{
    text-decoration: none;

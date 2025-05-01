@@ -6,7 +6,10 @@
       :class="{
   hidden: window.isHidden,
   centered: window.x === undefined && window.y === undefined
-}" :style="{ left: `${window.x}px`, top: `${window.y}px` }"
+}" :style="{
+    zIndex: window.zIndex,
+    ...(window.x !== undefined && window.y !== undefined ? { left: `${window.x}px`, top: `${window.y}px` } : {})
+}"
 
   >
     <section class="title-bar" ref="windowRefs">
@@ -34,7 +37,7 @@ const close = (window) => {
   window.isHidden = true;
 }
 
-'<! – Zdroj: https://stackoverflow.com/questions/78889656/vueuse-usedraggable-with-svg-and-v-for – ->'
+'<! – Source: https://stackoverflow.com/questions/78889656/vueuse-usedraggable-with-svg-and-v-for – ->'
 const windowRefs = ref([]);
 
 onMounted(() => {
@@ -42,6 +45,12 @@ onMounted(() => {
     useDraggable(el, {
       onMove: ({x, y}) => {
         windowsStore.updateWindowPosition(index, x, y);
+      },
+      onStart: () => {
+        windowsStore.windows.forEach((w) => {
+          w.zIndex = 0;
+        });
+        windowsStore.windows[index].zIndex = 10;
       }
     });
   });

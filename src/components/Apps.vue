@@ -1,6 +1,6 @@
 <template>
   <article class="apps" v-if="!isMobile">
-    <section v-for="(app, index) in windowsStore.windows" :key="index" @click="open(app)">
+    <section v-for="(app, index) in windowsStore.windows" :key="index" @click="toggle(app)">
       <img :src="app.icon" :alt="app.name">
       <p>{{ app.name }}</p>
     </section>
@@ -34,15 +34,13 @@ watch(isMobile, (newVal, oldVal) => {
   if (newVal !== oldVal) {
     if (newVal) {
       windowsStore.windows.forEach((window) => {
-        window.isHidden = true; // Hide all windows
+        window.isHidden = true;
       });
     } else {
-
-      router.push("/"); // Navigate to home to close the windows
+      router.push("/");
     }
   }
 });
-
 
 onMounted(() => {
   window.addEventListener("resize", handleResize);
@@ -58,9 +56,8 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", handleResize);
 });
 
-const open = (app) => {
-  app.isHidden = false;
-}
+const toggle = (app) => {
+  app.isHidden = !app.isHidden;}
 
 </script>
 
