@@ -43,6 +43,7 @@ const buy = (upgrade) => {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  column-gap: 1em;
 }
 
 .description {
@@ -79,5 +80,11 @@ const buy = (upgrade) => {
 
 p {
   font-size: 1.3em;
+}
+
+@media (max-width: 700px) {
+  .buy{
+    column-gap: 1em;
+  }
 }
 </style>

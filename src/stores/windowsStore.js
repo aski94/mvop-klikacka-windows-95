@@ -16,7 +16,8 @@ export const useWindowsStore = defineStore("windowsStore", () => {
             icon: "src/assets/images/my-computer.ico",
             isHidden: false,
             x: undefined,
-            y: undefined
+            y: undefined,
+            route: "/my-computer"
         },
         {
             name: "Network Neighborhood",
@@ -24,7 +25,8 @@ export const useWindowsStore = defineStore("windowsStore", () => {
             icon: "src/assets/images/network-neighborhood.ico",
             isHidden: true,
             x: undefined,
-            y: undefined
+            y: undefined,
+            route: "/network-neighborhood"
         },
         {
             name: "Inbox",
@@ -32,7 +34,8 @@ export const useWindowsStore = defineStore("windowsStore", () => {
             icon: "src/assets/images/inbox.ico",
             isHidden: true,
             x: undefined,
-            y: undefined
+            y: undefined,
+            route: "/inbox"
         },
         {
             name: "Recycle Bin",
@@ -40,7 +43,8 @@ export const useWindowsStore = defineStore("windowsStore", () => {
             icon: "src/assets/images/recycle-bin.ico",
             isHidden: true,
             x: undefined,
-            y: undefined
+            y: undefined,
+            route: "/recycle-bin"
         },
         {
             name: "The Internet",
@@ -48,7 +52,8 @@ export const useWindowsStore = defineStore("windowsStore", () => {
             icon: "src/assets/images/the-internet.ico",
             isHidden: true,
             x: undefined,
-            y: undefined
+            y: undefined,
+            route: "/the-internet"
         }
     ]);
 

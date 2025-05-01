@@ -1,9 +1,11 @@
 <template>
   <footer>
-    <button>
-      <img src="@/assets/images/windows-95-header.png" alt="Windows 95 logo">
-      <span>Start</span>
-    </button>
+    <router-link to="/" class="start-button">
+      <button>
+        <img src="@/assets/images/windows-95-header.png" alt="Windows 95 logo" />
+        <span>Start</span>
+      </button>
+    </router-link>
     <Apps></Apps>
   </footer>
 </template>
@@ -22,6 +24,10 @@ footer {
   box-sizing: border-box;
   background-color: rgb(195, 195, 195);
   border-top: 3px solid white;
+
+ a{
+   text-decoration: none;
+ }
 
   button {
     span {

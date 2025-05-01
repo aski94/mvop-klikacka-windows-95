@@ -132,10 +132,4 @@ section {
     column-gap: 20rem;
   }
 }
-
-@media (max-width: 700px) {
-  .title-bar {
-    column-gap: 8rem;
-  }
-}
 </style>
