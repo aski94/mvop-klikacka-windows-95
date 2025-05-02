@@ -33,8 +33,11 @@ import {useWindowsStore} from "@/stores/windowsStore.js";
 const windowsStore = useWindowsStore();
 
 const close = (window) => {
-  console.log("close");
+  //console.log("close");
   window.isHidden = true;
+  if (window.name === "Recycle Bin"){
+    windowsStore.step = 0;
+  }
 }
 
 '<! – Source: https://stackoverflow.com/questions/78889656/vueuse-usedraggable-with-svg-and-v-for – ->'

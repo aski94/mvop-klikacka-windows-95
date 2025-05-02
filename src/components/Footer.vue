@@ -18,6 +18,7 @@ const windowsStore = useWindowsStore();
 
 const reset = () => {
   windowsStore.resetWindows();
+  windowsStore.step = 0;
 }
 </script>
 

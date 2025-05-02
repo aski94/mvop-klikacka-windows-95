@@ -2,10 +2,10 @@
   <article class="window centered">
     <section class="title-bar">
       <section>
-        <img :src="route.meta.icon" :alt="route.meta.title"/>
-        <p>{{ route.meta.title }}</p>
+        <img :src="route.meta.icon" :alt="route.meta.name"/>
+        <p>{{ route.meta.name }}</p>
       </section>
-      <button @click="closeWindow"><span>X</span></button>
+      <button @click="close(window)"><span>X</span></button>
     </section>
 
     <router-view/>
@@ -15,12 +15,18 @@
 
 <script setup>
 import {useRouter, useRoute} from "vue-router";
+import {useWindowsStore} from "@/stores/windowsStore.js";
+
+const windowsStore = useWindowsStore();
 
 const router = useRouter();
 const route = useRoute();
 
-const closeWindow = () => {
+const close = (window) => {
   router.push("/");
+  if (route.meta.name === "Recycle Bin"){
+    windowsStore.step = 0;
+  }
 };
 </script>
 

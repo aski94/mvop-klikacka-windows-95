@@ -6,6 +6,7 @@
     </button>
     <p>{{ "+" + counterStore.perClick }}</p>
     <p>{{ "+" + counterStore.perSecond + "/s" }}</p>
+    <p v-if="counterStore.reinstallMultiplier !== 1">{{"*" + counterStore.reinstallMultiplier}}</p>
     <section class="earn">
       <p>{{ counterStore.count }}</p>
       <img src="@/assets/images/windows-95.svg" alt="Earn logo">

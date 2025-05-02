@@ -15,7 +15,7 @@ export const useWindowsStore = defineStore("windowsStore", () => {
             name: "My Computer",
             component: markRaw(MyComputer),
             icon: "src/assets/images/my-computer.ico",
-            isHidden: false,
+            isHidden: true,
             x: undefined,
             y: undefined,
             route: "/my-computer"
@@ -58,6 +58,8 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         }
     ]);
 
+    const step = ref(0);
+
     const updateWindowPosition = (index, x, y, isHidden) => {
         windows.value[index].x = x;
         windows.value[index].y = y;
@@ -67,7 +69,7 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         windows.value.forEach((window) => {
             window.x = undefined;
             window.y = undefined;
-            window.isHidden = window.name !== "My computer";
+            window.isHidden = true;
         });
     };
 
@@ -94,5 +96,5 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         localStorage.setItem(KEY, JSON.stringify(positions));
     }, { deep: true });
 
-    return { windows, updateWindowPosition, resetWindows};
+    return { windows, step, updateWindowPosition, resetWindows};
 });

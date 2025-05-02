@@ -89,6 +89,12 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
           */
     };
 
+    const reset = () => {
+        upgrades.value.forEach((upgrade) => {
+            upgrade.amount = 0;
+        });
+    };
+
     onMounted(() => {
         const storedUpgrades = JSON.parse(localStorage.getItem(KEY) ?? "[]");
 
@@ -108,5 +114,5 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
         deep: true
     });
 
-    return {upgrades, upgrade, logs}
+    return {upgrades, upgrade, logs, reset}
 })

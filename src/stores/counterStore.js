@@ -5,19 +5,27 @@ import {useUpgradesStore} from "@/stores/upgradesStore.js";
 const KEY = "count";
 const PER_CLICK_KEY = "perClick";
 const PER_SECOND_KEY = "perSecond";
+const REINSTALL_MULTIPLIER_KEY = "reinstallMultiplier";
 
 export const useCounterStore = defineStore("counterStore", () => {
     const upgradesStore = useUpgradesStore();
     const count = ref(Number(localStorage.getItem(KEY) ?? "0"))
     const perClick = ref(Number(localStorage.getItem(PER_CLICK_KEY) ?? "1"))
     const perSecond = ref(Number(localStorage.getItem(PER_SECOND_KEY) ?? "0"));
+    const reinstallMultiplier = ref(Number(localStorage.getItem(REINSTALL_MULTIPLIER_KEY) ?? "1"));
 
-    function increment() {
-        count.value += perClick.value;
+    const increment = () => {
+        count.value += perClick.value * reinstallMultiplier.value;
     }
 
-    function incrementPerSecond(){
-        count.value += perSecond.value;
+    const incrementPerSecond = () => {
+        count.value += perSecond.value * reinstallMultiplier.value;
+    }
+
+    const reset = () => {
+        count.value = 0;
+        perClick.value = 1;
+        perSecond.value = 0;
     }
 
     setInterval(incrementPerSecond, 1000);
@@ -26,13 +34,17 @@ export const useCounterStore = defineStore("counterStore", () => {
         localStorage.setItem(KEY, count.value);
     })
 
-    watch(perClick, () => {
+    watch(() => perClick.value, () => {
         localStorage.setItem(PER_CLICK_KEY, perClick.value);
     })
 
-    watch(perSecond, () => {
+    watch(() => perSecond.value, () => {
         localStorage.setItem(PER_SECOND_KEY, perSecond.value);
     })
 
-    return {count, perClick, perSecond, increment}
+    watch(() => reinstallMultiplier.value, () => {
+        localStorage.setItem(REINSTALL_MULTIPLIER_KEY, reinstallMultiplier.value);
+    })
+
+    return {count, perClick, perSecond, reinstallMultiplier, increment, reset}
 })
