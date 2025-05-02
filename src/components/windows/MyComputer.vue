@@ -45,7 +45,6 @@ section {
 }
 
 .earn {
-  width: 80px;
   justify-content: flex-end;
   column-gap: 0.5em;
 
@@ -59,5 +58,21 @@ section {
 
 p {
   font-size: 1.3em;
+}
+
+@media (max-width: 700px) {
+  .window-content {
+    flex-direction: column;
+    row-gap: 2em;
+    justify-content: flex-start;
+  }
+
+  .earn {
+    order: -1;
+  }
+
+  button{
+    order: -2;
+  }
 }
 </style>

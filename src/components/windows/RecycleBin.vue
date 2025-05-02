@@ -75,14 +75,23 @@ const close = () => {
 }
 
 const reinstall = () => {
-  counterStore.reinstallMultiplier = counterStore.reinstallMultiplier * 2;
-  console.log(counterStore.reinstallMultiplier);
-  windowsStore.resetWindows();
-  counterStore.reset();
-  upgradesStore.reset();
-  windowsStore.step = 0;
-  router.push("/");
-}
+  if (
+      counterStore.count >= 10000000 &&
+      upgradesStore.upgrades.every((upgrade) => upgrade.amount >= 1)
+  ) {
+    counterStore.reinstallMultiplier *= 2;
+    console.log(counterStore.reinstallMultiplier);
+    windowsStore.resetWindows();
+    counterStore.reset();
+    upgradesStore.reset();
+    windowsStore.step = 0;
+    router.push("/");
+  }
+  else {
+    upgradesStore.logs.push("Cannot reinstall. Requirements not met.");
+  }
+};
+
 </script>
 
 <style scoped lang="scss">
@@ -150,11 +159,11 @@ img {
     grid-column: 1 / 2;
   }
 
-  img{
+  img {
     display: none;
   }
 
-  hr{
+  hr {
     width: 100%;
   }
 }
