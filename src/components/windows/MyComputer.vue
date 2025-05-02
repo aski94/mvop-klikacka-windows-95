@@ -5,7 +5,7 @@
       <img src="@/assets/images/windows-95.svg" alt="Earn logo">
     </button>
     <p>{{ "+" + counterStore.perClick }}</p>
-    <p>+0/s</p>
+    <p>{{ "+" + counterStore.perSecond + "/s" }}</p>
     <section class="earn">
       <p>{{ counterStore.count }}</p>
       <img src="@/assets/images/windows-95.svg" alt="Earn logo">

@@ -11,32 +11,59 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
         {
             title: "Better Mouse",
             icon: "src/assets/images/mouse.ico",
-            price: 50,
+            price: 500,
             //price: 5,
+            priceMultiplier: 1.3,
             perClick: 1,
+            perSecond: 0,
             amount: 0
         },
         {
             title: "Better Storage",
             icon: "src/assets/images/storage.ico",
-            price: 120,
-            perClick: 2,
+            price: 150,
+            priceMultiplier: 1.15,
+            perClick: 0,
+            perSecond: 1,
             amount: 0
         },
         {
             title: "More RAM",
             icon: "src/assets/images/ram.ico",
-            price: 300,
-            perClick: 3,
+            price: 2000,
+            priceMultiplier: 1.15,
+            perClick: 0,
+            perSecond: 8,
             amount: 0
         },
         {
             title: "Faster CPU",
             icon: "src/assets/images/cpu.ico",
-            price: 750,
-            perClick: 5,
+            price: 25000,
+            priceMultiplier: 1.15,
+            perClick: 0,
+            perSecond: 45,
+            amount: 0
+        },
+        {
+            title: "Faster GPU",
+            icon: "src/assets/images/gpu.ico",
+            price: 300000,
+            priceMultiplier: 1.15,
+            perClick: 0,
+            perSecond: 250,
+            amount: 0
+        },
+        {
+            title: "Faster Internet",
+            icon: "src/assets/images/internet.ico",
+            price: 3500000,
+            priceMultiplier: 1.15,
+            perClick: 0,
+            perSecond: 1500,
             amount: 0
         }
+
     ]);
 
     const logs = ref([]);
@@ -51,8 +78,9 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
         counterStore.count -= upgrade.price;
         upgrade.amount++;
         counterStore.perClick += upgrade.perClick;
+        counterStore.perSecond += upgrade.perSecond;
         logs.value.push("Bought" + " " + upgrade.title);
-        upgrade.price = Math.floor(upgrade.price * 1.5);
+        upgrade.price = Math.floor(upgrade.price * upgrade.priceMultiplier);
 
         /*
           console.log("amount: " + upgrade.title + " " + upgrade.amount);

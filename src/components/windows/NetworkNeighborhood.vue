@@ -2,7 +2,8 @@
   <section class="window-content">
     <section class="upgrade">
       <p class="left">Upgrade:</p>
-      <p>Per click:</p>
+      <p>Per Click:</p>
+      <p>Per Second:</p>
       <p>Amount:</p>
     </section>
     <section v-for="(upgrade, index) in upgradesStore.upgrades" :key="index" class="upgrade">
@@ -11,6 +12,7 @@
         <img :src="upgrade.icon" :alt="upgrade.name">
       </section>
       <p>{{ "+" + upgrade.perClick}}</p>
+      <p>{{ "+" + upgrade.perSecond + "/s" }}</p>
       <p class="">{{ upgrade.amount }}</p>
     </section>
   </section>
@@ -31,7 +33,7 @@ const upgradesStore = useUpgradesStore();
 
 .upgrade {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   justify-items: center;
   align-items: center;
@@ -61,5 +63,18 @@ p {
 
 .left{
   justify-self: flex-start;
+}
+
+@media (max-width: 700px) {
+
+  .upgrade {
+    column-gap: 0.5em;
+  }
+
+ .description {
+   p:nth-child(1){
+     display: none;
+   }
+ }
 }
 </style>

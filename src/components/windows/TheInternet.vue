@@ -84,7 +84,14 @@ p {
 
 @media (max-width: 700px) {
   .buy{
-    column-gap: 1em;
+    column-gap: 1.5em;
+  }
+
+
+  .description {
+    p:nth-child(1){
+      display: none;
+    }
   }
 }
 </style>

@@ -12,7 +12,7 @@ const KEY = "windowPositions";
 export const useWindowsStore = defineStore("windowsStore", () => {
     const windows = ref([
         {
-            name: "My computer",
+            name: "My Computer",
             component: markRaw(MyComputer),
             icon: "src/assets/images/my-computer.ico",
             isHidden: false,
