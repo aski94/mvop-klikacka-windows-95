@@ -28,5 +28,5 @@ coverage
 *.sw?
 
 *.tsbuildinfo
-/github-link.txt
-/website-link.txt
+github-link.txt
+website-link.txt
