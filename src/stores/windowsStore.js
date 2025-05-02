@@ -14,7 +14,7 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         {
             name: "My Computer",
             component: markRaw(MyComputer),
-            icon: "src/assets/images/my-computer.ico",
+            icon: "/images/my-computer.ico",
             isHidden: true,
             x: undefined,
             y: undefined,
@@ -23,7 +23,7 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         {
             name: "Network Neighborhood",
             component: markRaw(NetworkNeighborhood),
-            icon: "src/assets/images/network-neighborhood.ico",
+            icon: "/images/network-neighborhood.ico",
             isHidden: true,
             x: undefined,
             y: undefined,
@@ -32,7 +32,7 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         {
             name: "Inbox",
             component: markRaw(Inbox),
-            icon: "src/assets/images/inbox.ico",
+            icon: "/images/inbox.ico",
             isHidden: true,
             x: undefined,
             y: undefined,
@@ -41,7 +41,7 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         {
             name: "Recycle Bin",
             component: markRaw(RecycleBin),
-            icon: "src/assets/images/recycle-bin.ico",
+            icon: "/images/recycle-bin.ico",
             isHidden: true,
             x: undefined,
             y: undefined,
@@ -50,7 +50,7 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         {
             name: "The Internet",
             component: markRaw(TheInternet),
-            icon: "src/assets/images/the-internet.ico",
+            icon: "/images/the-internet.ico",
             isHidden: true,
             x: undefined,
             y: undefined,

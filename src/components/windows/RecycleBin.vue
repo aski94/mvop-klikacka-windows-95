@@ -1,6 +1,6 @@
 <template>
   <section class="window-content" v-if="windowsStore.step === 0">
-    <img src="@/assets/images/reinstall.png" alt="reinstallation image"/>
+    <img src="/images/reinstall.png" alt="reinstallation image"/>
     <section class="description">
       <p>
         Windows 95 Reinstallation Wizard
@@ -33,7 +33,7 @@
   </section>
 
   <section class="window-content" v-if="windowsStore.step === 1">
-    <img src="@/assets/images/reinstall.png" alt="Reinstallation"/>
+    <img src="/images/reinstall.png" alt="Reinstallation"/>
     <section class="description">
       <p>
         Are you absolutely sure?

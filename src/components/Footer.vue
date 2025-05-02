@@ -2,7 +2,7 @@
   <footer>
     <router-link to="/" class="start-button">
       <button @click="reset">
-        <img src="@/assets/images/windows-95-header.png" alt="Windows 95 logo" />
+        <img src="/images/windows-95-header.png" alt="Windows 95 logo" />
         <span>Start</span>
       </button>
     </router-link>

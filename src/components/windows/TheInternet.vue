@@ -8,7 +8,7 @@
       <section class="buy">
         <section class="price">
           <p>{{ upgrade.price }}</p>
-          <img src="@/assets/images/windows-95.svg" alt="Earn logo">
+          <img src="/images/windows-95.svg" alt="Earn logo">
         </section>
         <button @click="buy(upgrade)">
           <span>Buy</span>

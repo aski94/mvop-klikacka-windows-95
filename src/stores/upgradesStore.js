@@ -10,7 +10,7 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
     const upgrades = ref([
         {
             title: "Better Mouse",
-            icon: "src/assets/images/mouse.ico",
+            icon: "/images/mouse.ico",
             price: 500,
             //price: 5,
             priceMultiplier: 1.3,
@@ -20,7 +20,7 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
         },
         {
             title: "Better Storage",
-            icon: "src/assets/images/storage.ico",
+            icon: "/images/storage.ico",
             price: 150,
             priceMultiplier: 1.15,
             perClick: 0,
@@ -29,7 +29,7 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
         },
         {
             title: "More RAM",
-            icon: "src/assets/images/ram.ico",
+            icon: "/images/ram.ico",
             price: 2000,
             priceMultiplier: 1.15,
             perClick: 0,
@@ -38,7 +38,7 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
         },
         {
             title: "Faster CPU",
-            icon: "src/assets/images/cpu.ico",
+            icon: "/images/cpu.ico",
             price: 25000,
             priceMultiplier: 1.15,
             perClick: 0,
@@ -47,7 +47,7 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
         },
         {
             title: "Faster GPU",
-            icon: "src/assets/images/gpu.ico",
+            icon: "/images/gpu.ico",
             price: 300000,
             priceMultiplier: 1.15,
             perClick: 0,
@@ -56,7 +56,7 @@ export const useUpgradesStore = defineStore("upgradesStore", () => {
         },
         {
             title: "Faster Internet",
-            icon: "src/assets/images/internet.ico",
+            icon: "/images/internet.ico",
             price: 3500000,
             priceMultiplier: 1.15,
             perClick: 0,

@@ -2,14 +2,14 @@
   <section class="window-content">
     <button @click="increment">
       <span>Earn</span>
-      <img src="@/assets/images/windows-95.svg" alt="Earn logo">
+      <img src="/images/windows-95.svg" alt="Earn logo">
     </button>
     <p>{{ "+" + counterStore.perClick }}</p>
     <p>{{ "+" + counterStore.perSecond + "/s" }}</p>
     <p v-if="counterStore.reinstallMultiplier !== 1">{{"*" + counterStore.reinstallMultiplier}}</p>
     <section class="earn">
       <p>{{ counterStore.count }}</p>
-      <img src="@/assets/images/windows-95.svg" alt="Earn logo">
+      <img src="/images/windows-95.svg" alt="Earn logo">
     </section>
   </section>
 </template>
