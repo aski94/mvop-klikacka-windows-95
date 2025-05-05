@@ -58,10 +58,13 @@ onBeforeUnmount(() => {
 
 const toggle = (app) => {
   app.isHidden = !app.isHidden;
-  if (app.name === "Recycle Bin"){
+  if (!app.isHidden) {
+    windowsStore.bringToFront(app.name);
+  }
+  if (app.name === "Recycle Bin") {
     windowsStore.step = 0;
   }
-}
+};
 
 </script>
 

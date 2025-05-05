@@ -7,10 +7,10 @@
   hidden: window.isHidden,
   centered: window.x === undefined && window.y === undefined
 }" :style="{
-    zIndex: window.zIndex,
+    zIndex: windowsStore.getZIndex(window.name),
     ...(window.x !== undefined && window.y !== undefined ? { left: `${window.x}px`, top: `${window.y}px` } : {})
 }"
-
+      @click="bringToFront(index)"
   >
     <section class="title-bar" ref="windowRefs">
       <section>
@@ -35,10 +35,14 @@ const windowsStore = useWindowsStore();
 const close = (window) => {
   //console.log("close");
   window.isHidden = true;
-  if (window.name === "Recycle Bin"){
+  if (window.name === "Recycle Bin") {
     windowsStore.step = 0;
   }
 }
+
+const bringToFront = (index) => {
+  windowsStore.bringToFront(windowsStore.windows[index].name);
+};
 
 '<! – Source: https://stackoverflow.com/questions/78889656/vueuse-usedraggable-with-svg-and-v-for – ->'
 const windowRefs = ref([]);
@@ -50,10 +54,7 @@ onMounted(() => {
         windowsStore.updateWindowPosition(index, x, y);
       },
       onStart: () => {
-        windowsStore.windows.forEach((w) => {
-          w.zIndex = 0;
-        });
-        windowsStore.windows[index].zIndex = 10;
+        windowsStore.bringToFront(windowsStore.windows[index].name);
       }
     });
   });

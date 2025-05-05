@@ -8,6 +8,7 @@ import RecycleBin from "@/components/windows/RecycleBin.vue";
 import TheInternet from "@/components/windows/TheInternet.vue";
 
 const KEY = "windowPositions";
+const STACK_KEY = "windowStack";
 
 export const useWindowsStore = defineStore("windowsStore", () => {
     const windows = ref([
@@ -60,6 +61,8 @@ export const useWindowsStore = defineStore("windowsStore", () => {
 
     const step = ref(0);
 
+    const windowStack = ref([]);
+
     const updateWindowPosition = (index, x, y, isHidden) => {
         windows.value[index].x = x;
         windows.value[index].y = y;
@@ -73,6 +76,17 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         });
     };
 
+    const bringToFront = (window) => {
+        windowStack.value = windowStack.value.filter(name => name !== window);
+        windowStack.value.push(window);
+    };
+
+    const getZIndex = (window) => {
+        const index = windowStack.value.indexOf(window);
+        if (index === -1) return 0;
+        return index + 1;
+    };
+
     onMounted(() => {
         const storedWindows = JSON.parse(localStorage.getItem(KEY) ?? "[]");
         for (let i = 0; i < windows.value.length; i++) {
@@ -84,6 +98,9 @@ export const useWindowsStore = defineStore("windowsStore", () => {
                 windows.value[i].isHidden = stored.isHidden !== undefined ? stored.isHidden : windows.value[i].isHidden;
             }
         }
+
+        const storedStack = JSON.parse(localStorage.getItem(STACK_KEY) ?? "[]");
+        windowStack.value = storedStack.length ? storedStack : windows.value.map(window => window.name);
     });
 
     watch(() => windows.value, () => {
@@ -96,5 +113,9 @@ export const useWindowsStore = defineStore("windowsStore", () => {
         localStorage.setItem(KEY, JSON.stringify(positions));
     }, { deep: true });
 
-    return { windows, step, updateWindowPosition, resetWindows};
+    watch(windowStack, () => {
+        localStorage.setItem(STACK_KEY, JSON.stringify(windowStack.value));
+    }, { deep: true });
+
+    return { windows, step, bringToFront, getZIndex, updateWindowPosition, resetWindows};
 });
