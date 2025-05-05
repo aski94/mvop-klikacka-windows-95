@@ -18,7 +18,7 @@ const router = createRouter({
             component: PhoneWindows,
             meta: {
                 name: "Inbox",
-                icon: "src/assets/images/inbox.ico",
+                icon: "/images/inbox.ico",
             },
             children: [
                 {
@@ -32,7 +32,7 @@ const router = createRouter({
             component: PhoneWindows,
             meta: {
                 name: "My computer",
-                icon: "src/assets/images/my-computer.ico",
+                icon: "/images/my-computer.ico",
             },
             children: [
                 {
@@ -46,7 +46,7 @@ const router = createRouter({
             component: PhoneWindows,
             meta: {
                 name: "Network Neighborhood",
-                icon: "src/assets/images/network-neighborhood.ico",
+                icon: "/images/network-neighborhood.ico",
             },
             children: [
                 {
@@ -60,7 +60,7 @@ const router = createRouter({
             component: PhoneWindows,
             meta: {
                 name: "Recycle Bin",
-                icon: "src/assets/images/recycle-bin.ico",
+                icon: "/images/recycle-bin.ico",
             },
             children: [
                 {
@@ -74,7 +74,7 @@ const router = createRouter({
             component: PhoneWindows,
             meta: {
                 name: "The Internet",
-                icon: "src/assets/images/the-internet.ico",
+                icon: "/images/the-internet.ico",
             },
             children: [
                 {

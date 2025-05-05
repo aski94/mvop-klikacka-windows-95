@@ -85,6 +85,7 @@ const reinstall = () => {
     counterStore.reset();
     upgradesStore.reset();
     windowsStore.step = 0;
+    upgradesStore.logs = [];
     router.push("/");
   }
   else {
